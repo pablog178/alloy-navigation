@@ -2,5 +2,5 @@
 	top: 0,
 	width: Ti.UI.FILL,
 	height: 45,
-	backgroundColor: Alloy.Globals.colors.TORY_BLUE
+	backgroundColor: "blue"
 }

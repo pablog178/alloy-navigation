@@ -62,7 +62,7 @@ function loadContent (view) {
 }
 
 //loads a new array info of base tabs to be openned
-function loadTabs(params) {
+$.loadTabs = function(params) {
 	Ti.API.debug('Load tabs');
 	
 	params = params || {};
@@ -82,9 +82,9 @@ function loadTabs(params) {
 			loadContent(view);
 		}
 	}
-}
+};
 //Opens a new window on the tab (if specified)
-function open(params){
+$.open = function(params){
 	Ti.API.debug('Open new window');
 	params = params || {};
 	if(params.view){
@@ -95,10 +95,10 @@ function open(params){
 		// tab = _.uniq(tab, true);
 		loadContent(view);
 	}
-}
+};
 
 //Closes the top-most window from the tab (if specified)
-function close(params){
+$.close = function(params){
 	Ti.API.debug('Close Window');
 	params = params || {};
 
@@ -117,10 +117,10 @@ function close(params){
 	$.container.remove(viewToClose);
 
 	loadContent(_.last(tab));
-}
+};
 
 //Changes to a new tab, opening its top-most window
-function changeTab(tabIndex){
+$.changeTab = function(tabIndex){
 	Ti.API.debug('Change tab');
 
 	if(navigation[tabIndex]){
@@ -129,9 +129,6 @@ function changeTab(tabIndex){
 		var tab = navigation[currentTab];
 		loadContent(_.last(tab));
 	}
-}
+};
 
-exports.loadTabs = loadTabs;
-exports.open = open;
-exports.close = close;
-exports.changeTab = changeTab;
+init();
