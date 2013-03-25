@@ -1,5 +1,1 @@
-function doClick(e) {  
-    alert($.label.text);
-}
-
-$.index.open();
+$.navGroup.window.open();

@@ -1,0 +1,13 @@
+{
+	"id": "navigation",
+	"name": "navigation",
+	"description" : "Custom navigation flow for the iOS, Android and Mobileweb",
+	"author": "pablog178",
+	"version": "1.0",
+	"copyright":"Copyright (c) 2013",
+	"license":"Public Domain",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"3.0",
+	"tags":"navigation, flow, windows",
+	"platforms":"android,ios,mobileweb"
+}

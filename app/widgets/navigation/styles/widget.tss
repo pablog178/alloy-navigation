@@ -1,0 +1,23 @@
+"#window" : {
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	backgroundColor : "#FFF"
+},
+"#window[platform=android]" : {
+	positions : {
+		"header" : "top",
+		"tabBar" : "top"
+	}
+},
+"#window[platform=ios]" : {
+	positions : {
+		"header" : "top",
+		"tabBar" : "bottom"
+	}
+}
+"#window[platform=mobileweb]" : {
+	positions : {
+		"header" : "top",
+		"tabBar" : "none"
+	}
+}

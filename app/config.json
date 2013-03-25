@@ -5,5 +5,7 @@
 	"env:production": {}, 
 	"os:ios": {}, 
 	"os:android": {}, 
-	"dependencies": {}
+	"dependencies": {
+		"navigation" : "1.0"
+	}
 }

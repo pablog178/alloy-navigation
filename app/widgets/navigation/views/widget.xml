@@ -1,0 +1,5 @@
+<Alloy>
+	<Window id="window">
+		<View id="container" />
+	</Window>
+</Alloy>
