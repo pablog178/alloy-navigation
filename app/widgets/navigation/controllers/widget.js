@@ -91,7 +91,7 @@ $.loadTabs = function(params) {
 	for(var i in $.tabsInfo){
 		tab = $.tabsInfo[i];
 		//window created from the controller and added to the navigation info
-		var view = tab.view;
+		var view = tab.view || Alloy.createController(tab.controller, tab.args).getView();
 		if(!navigation[i]){
 			navigation[i] = [];
 		}
@@ -107,14 +107,20 @@ $.loadTabs = function(params) {
 $.open = function(params){
 	Ti.API.debug('Open new window');
 	params = params || {};
-	if(params.view){
+	var controller;
+	if(params.controller){
+		controller = Alloy.createController(params.controller, params.args);
+	}
+	var view = params.view || (controller && controller.getView());
+	if(view){
 		var tabIndex = params.tabIndex || currentTab;
 		var tab = navigation[tabIndex];
-		var view = params.view;
 		tab.push(view);
 		// tab = _.uniq(tab, true);
 		loadContent(view);
 	}
+
+	return controller || view || null;
 };
 
 //Closes the top-most window from the tab (if specified)
