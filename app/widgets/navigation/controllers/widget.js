@@ -1,5 +1,5 @@
 //tabs base information (base controller window, title and icon)
-var tabs = [];
+$.tabsInfo = [];
 //navigation information (contains a stack fo windows for each tab)
 var navigation = {};
 //index for current opened tab
@@ -84,10 +84,10 @@ $.loadTabs = function(params) {
 	Ti.API.debug('Load tabs');
 	
 	params = params || {};
-	tabs = params.tabs || [];
+	$.tabsInfo = params.tabs || [];
 	components.tabBar && components.tabBar.loadTabs(params);
-	for(var i in tabs){
-		var tab = tabs[i];
+	for(var i in $.tabsInfo){
+		tab = $.tabsInfo[i];
 		//window created from the controller and added to the navigation info
 		var view = tab.view;
 		if(!navigation[i]){
@@ -146,7 +146,7 @@ $.close = function(params){
 $.changeTab = function(tabIndex){
 	Ti.API.debug('Change tab');
 
-	if(navigation[tabIndex]){
+	if(navigation[tabIndex] && tabIndex !== currentTab){
 		components.tabBar && components.tabBar.changeTab(tabIndex);
 		currentTab = tabIndex;
 		var tab = navigation[currentTab];
