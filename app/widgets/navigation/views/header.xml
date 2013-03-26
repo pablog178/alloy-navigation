@@ -1,4 +1,8 @@
 <Alloy>
 	<View id="wrapper">
+		<View id="leftView" class="navView">
+			<Button id="back" />
+		</View>
+		<View id="rightView" class="navView" />
 	</View>
 </Alloy>

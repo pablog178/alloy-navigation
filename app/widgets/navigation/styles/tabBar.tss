@@ -1,5 +1,6 @@
 "#wrapper" : {
 	width: Ti.UI.FILL,
 	height: 40,
+	layout: "horizontal",
 	backgroundColor: "gray"
 }

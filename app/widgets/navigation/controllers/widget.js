@@ -29,6 +29,22 @@ function init () {
 			margins[position] += view.height;
 		}
 	}
+	components.header && components.header.wrapper.addEventListener("click", function(evt){
+		var id = evt.source.id;
+		if(id){
+			switch(id){
+				case "back":
+					$.close();
+					break;
+			}
+		}
+	});
+	components.tabBar && components.tabBar.wrapper.addEventListener("click", function(evt){
+		var tabIndex = evt.source.tabIndex;
+		if(tabIndex != null){
+			$.changeTab(tabIndex);
+		}
+	});
 }
 
 function loadContent (view) {
@@ -52,13 +68,15 @@ function loadContent (view) {
 	}
 
 	components.header.title = view.title || "";
-	view.navLeftView 	&& components.header.addLeftView(view.navLeftView);
+
+	view.navLeftView  && components.header.addLeftView(view.navLeftView);
 	view.navRightView && components.header.addRightView(view.navRightView);
 
 	openedContent && $.container.remove(openedContent);
 	//Free resources
 	openedContent = null;
 	openedContent = view;
+	$.container.add(view);
 }
 
 //loads a new array info of base tabs to be openned
@@ -67,7 +85,7 @@ $.loadTabs = function(params) {
 	
 	params = params || {};
 	tabs = params.tabs || [];
-	components.tabBar && components.tabBar.loadTabs(tabs);
+	components.tabBar && components.tabBar.loadTabs(params);
 	for(var i in tabs){
 		var tab = tabs[i];
 		//window created from the controller and added to the navigation info
@@ -106,17 +124,22 @@ $.close = function(params){
 	var tabIndex = params.tabIndex || currentTab;
 	var tab = navigation[tabIndex];
 	var viewToClose;
-	if(parms.viewToClose){
+
+	if(params.viewToClose){
 		viewToClose = _.find(tab, function(view){
 			return view == params.viewToClose;
 		});
 		tab = _.without(tab, viewToClose);
 	} else {
-		viewToClose = tab.pop();
+		if(tab.length > 1){
+			viewToClose = tab.pop();
+		}
 	}
-	$.container.remove(viewToClose);
 
-	loadContent(_.last(tab));
+	if(viewToClose){
+		$.container.remove(viewToClose);
+		loadContent(_.last(tab));
+	}
 };
 
 //Changes to a new tab, opening its top-most window

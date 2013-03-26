@@ -1,3 +1,4 @@
+Alloy.Globals.navGroup = $.navGroup;
 var win1 = Alloy.createController("win1");
 var win2 = Alloy.createController("win2");
 var win3 = Alloy.createController("win3");
@@ -17,5 +18,7 @@ var tabs = [
 		title: "Window 4"
 	}
 ];
-$.navGroup.loadTabs(tabs);
+$.navGroup.loadTabs({
+	tabs : tabs
+});
 $.navGroup.window.open();
