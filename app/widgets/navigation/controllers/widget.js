@@ -67,7 +67,9 @@ function loadContent (view) {
 		}
 	}
 
-	components.header.title = view.title || "";
+	if(components.header){
+		components.header.title.text = view.title || "";
+	}
 
 	view.navLeftView  && components.header.addLeftView(view.navLeftView);
 	view.navRightView && components.header.addRightView(view.navRightView);
@@ -137,7 +139,6 @@ $.close = function(params){
 	}
 
 	if(viewToClose){
-		$.container.remove(viewToClose);
 		loadContent(_.last(tab));
 	}
 };

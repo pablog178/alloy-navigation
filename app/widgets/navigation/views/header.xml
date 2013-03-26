@@ -4,5 +4,6 @@
 			<Button id="back" />
 		</View>
 		<View id="rightView" class="navView" />
+		<Label id="title" />
 	</View>
 </Alloy>
