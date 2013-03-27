@@ -65,8 +65,12 @@ function loadContent (view) {
 		components.header.title.text = view.title || "";
 	}
 
-	view.navLeftView  && components.header.addLeftView(view.navLeftView);
-	view.navRightView && components.header.addRightView(view.navRightView);
+	if(navigation[currentTab].length < 2){
+		view.navLeftView = view.navLeftView || false;
+	}
+
+	components.header.addLeftView(view.navLeftView);
+	components.header.addRightView(view.navRightView);
 
 	openedContent && $.container.remove(openedContent);
 	//Free resources

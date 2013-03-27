@@ -1,4 +1,6 @@
-var currents = {};
+var currents = {
+	left: $.back
+};
 function addView (view, side) {
 	if(currents[side] != view){
 		var container = $[side + "View"];
