@@ -1,10 +1,12 @@
 var currents = {};
 function addView (view, side) {
-	var container = $[side + "View"];
-	currents[side] && container.remove(currents[side]);
-	currents[side] = view;
-	if(currents[side]){
-		container.add(currents[side]);
+	if(currents[side] != view){
+		var container = $[side + "View"];
+		currents[side] && container.remove(currents[side]);
+		currents[side] = view;
+		if(currents[side]){
+			container.add(currents[side]);
+		}
 	}
 }
 

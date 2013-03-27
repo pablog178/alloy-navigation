@@ -29,16 +29,8 @@ function init () {
 			margins[position] += view.height;
 		}
 	}
-	components.header && components.header.wrapper.addEventListener("click", function(evt){
-		var id = evt.source.id;
-		if(id){
-			switch(id){
-				case "back":
-					$.close();
-					break;
-			}
-		}
-	});
+	components.header && components.header.back.addEventListener("click", $.close);
+	//TODO Fix this for mobileweb (currently working since the tabBar is not presented on mobileweb)
 	components.tabBar && components.tabBar.wrapper.addEventListener("click", function(evt){
 		var tabIndex = evt.source.tabIndex;
 		if(tabIndex != null){

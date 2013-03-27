@@ -1,23 +1,22 @@
 ".navView" : {
-	width: "20%",
-	height: "95%"
+	width: Ti.UI.SIZE,
+	height: Ti.UI.FILL
 },
 "#wrapper" : {
-	top: 0,
 	width: Ti.UI.FILL,
-	height: 45,
+	height: 65,
 	backgroundColor: "blue"
 },
 "#leftView" : {
-	left: 10
+	left: 0
 },
 "#rightView" : {
-	right: 10
+	right: 0
 },
 "#back" : {
-	width: Ti.UI.FILL,
+	width: 80,
 	height: Ti.UI.FILL,
 	title: "Back",
-	backgroundColor: "orange",
-	action: "back"
+	backgroundImage: "",
+	backgroundColor: "orange"
 }
