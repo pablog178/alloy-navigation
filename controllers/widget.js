@@ -67,6 +67,8 @@ function loadContent (view) {
 		}
 	}
 
+	$.container.applyProperties(margins);
+
 	if(components.header){
 		components.header.title.text = view.title || "";
 	}
