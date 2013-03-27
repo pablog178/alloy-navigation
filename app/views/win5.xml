@@ -1,5 +1,0 @@
-<Alloy>
-	<View class="container" onClick="closeWindow">
-		<Label>Win 5</Label>
-	</View>
-</Alloy>
