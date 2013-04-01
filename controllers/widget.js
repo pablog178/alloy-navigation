@@ -1,3 +1,4 @@
+var args = arguments[0] || {};
 //tabs base information (base controller window, title and icon)
 $.tabsInfo = [];
 //navigation information (contains a stack fo windows for each tab)
@@ -21,7 +22,7 @@ function init () {
 	for(var i in components){
 		var position = $.window.positions[i];
 		if(position !== "none"){
-			components[i] = Alloy.createWidget("navigation", i);
+			components[i] = Alloy.createWidget("navigation", i, (args[i] || null));
 			component = components[i];
 			var view = component.getView();
 			view[position] = margins[position];

@@ -1,3 +1,11 @@
+var args = arguments[0] || {};
+
+if(_.size(args) > 0){
+	$.wrapper.applyProperties(args);
+	args.back && $.back.applyProperties(args.back);
+}
+
+
 var currents = {
 	left: $.back
 };
