@@ -4,6 +4,8 @@
 	backgroundColor : "#FFF"
 },
 "#window[platform=android]" : {
+	exitOnClose: true,
+	modal: false,
 	positions : {
 		"header" : "top",
 		"tabBar" : "top"

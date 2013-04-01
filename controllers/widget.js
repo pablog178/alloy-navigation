@@ -37,6 +37,16 @@ function init () {
 			$.changeTab(tabIndex);
 		}
 	});
+
+	if(OS_ANDROID){
+		$.window.addEventListener("android:back", function(){
+			if(navigation[currentTab].length > 1){
+				$.close();
+			} else {
+				$.window.close();
+			}
+		});
+	}
 }
 
 function loadContent (view) {
