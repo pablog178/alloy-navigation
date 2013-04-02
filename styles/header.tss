@@ -4,8 +4,7 @@
 },
 "#wrapper" : {
 	width: Ti.UI.FILL,
-	height: 65,
-	backgroundColor: "blue"
+	height: 65
 },
 "#leftView" : {
 	left: 0
@@ -15,8 +14,6 @@
 },
 "#back" : {
 	width: 80,
-	height: Ti.UI.FILL,
 	title: "Back",
-	backgroundImage: "",
-	backgroundColor: "orange"
+	height: Ti.UI.FILL
 }
