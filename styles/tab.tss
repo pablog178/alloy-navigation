@@ -1,14 +1,22 @@
-"#wrapper" : {
+"#tab" : {
 	width: "25%",
 	height: Ti.UI.FILL,
 	backgroundSelectedColor: "black"
+},
+"#wrapper" : {
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	touchEnabled: false
 },
 "#icon" : {
 	touchEnabled: false
 },
 "#title" : {
-	width: Ti.UI.FILL,
-	height: 20,
-	color: "#FFF",
+	touchEnabled: false
+},
+"#separator" : {
+	width: 1,
+	height: Ti.UI.FILL,
+	backgroundColor: "#FFF",
 	touchEnabled: false
 }

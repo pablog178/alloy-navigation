@@ -1,6 +1,9 @@
 <Alloy>
-	<View id="wrapper">
-		<ImageView id="icon" />
-		<Label id="title" />
+	<View id="tab">
+		<View id="wrapper">
+			<ImageView id="icon" />
+			<Label id="title" />
+		</View>
+		<View id="separator" />
 	</View>
 </Alloy>
