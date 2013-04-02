@@ -1,17 +1,14 @@
 "#wrapper" : {
+	width: "25%",
 	height: Ti.UI.FILL,
-	width: 50,
-	backgroundNormalColor: "gray",
 	backgroundSelectedColor: "black"
 },
 "#icon" : {
 	touchEnabled: false
 },
 "#title" : {
-	top: 5,
 	width: Ti.UI.FILL,
 	height: 20,
 	color: "#FFF",
-	textAlign: "center",
 	touchEnabled: false
 }
