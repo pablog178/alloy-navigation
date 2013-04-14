@@ -3,8 +3,8 @@ var args = arguments[0] || {};
 if(_.size(args) > 0){
 	$.wrapper.applyProperties(args);
 	args.back && $.back.applyProperties(args.back);
+	args.title && $.title.applyProperties(args.title);
 }
-
 
 var currents = {
 	left: $.back
