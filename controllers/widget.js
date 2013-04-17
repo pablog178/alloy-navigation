@@ -167,8 +167,22 @@ $.close = function(params){
 	}
 
 	if(viewToClose){
-		loadContent(_.last(tab).view);
+		!params.preventLoad && loadContent(_.last(tab).view);
 		viewToClose.controller && viewToClose.controller.finalize && viewToClose.controller.finalize();
+		return true;
+	}
+	return false;
+};
+
+$.closeAll = function(params){
+	params = params || {};
+	var tabIndex = params.tabIndex || currentTab;
+	var tab = navigation[tabIndex];
+	while(tab.length > 1){
+		$.close({
+			tabIndex: tabIndex,
+			preventLoad: tab.length != 2
+		});
 	}
 };
 
