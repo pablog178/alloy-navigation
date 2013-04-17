@@ -100,11 +100,21 @@ $.loadTabs = function(params) {
 	for(var i in $.tabsInfo){
 		tab = $.tabsInfo[i];
 		//window created from the controller and added to the navigation info
-		var view = tab.view || Alloy.createController(tab.controller, tab.args).getView();
+		var controller;
+		var view;
+		if(tab.view){
+			view = tab.view;
+		} else {
+			controller = Alloy.createController(tab.controller, tab.args);
+			view = controller.getView();
+		}
 		if(!navigation[i]){
 			navigation[i] = [];
 		}
-		navigation[i].push(view);
+		navigation[i].push({
+			controller: controller,
+			view: view
+		});
 		//Opens the first base view (from the first tab)
 		if(i == currentTab){
 			Ti.API.debug('Opens first view');
@@ -124,7 +134,10 @@ $.open = function(params){
 	if(view){
 		var tabIndex = params.tabIndex || currentTab;
 		var tab = navigation[tabIndex];
-		tab.push(view);
+		tab.push({
+			controller: controller,
+			view: view
+		});
 		// tab = _.uniq(tab, true);
 		loadContent(view);
 	}
@@ -143,8 +156,8 @@ $.close = function(params){
 	var viewToClose;
 
 	if(params.viewToClose){
-		viewToClose = _.find(tab, function(view){
-			return view == params.viewToClose;
+		viewToClose = _.find(tab, function(info){
+			return info.view == params.viewToClose;
 		});
 		tab = _.without(tab, viewToClose);
 	} else {
@@ -154,7 +167,8 @@ $.close = function(params){
 	}
 
 	if(viewToClose){
-		loadContent(_.last(tab));
+		loadContent(_.last(tab).view);
+		viewToClose.controller && viewToClose.controller.finalize && viewToClose.controller.finalize();
 	}
 };
 
@@ -166,7 +180,7 @@ $.changeTab = function(tabIndex){
 		components.tabBar && components.tabBar.changeTab(tabIndex);
 		currentTab = tabIndex;
 		var tab = navigation[currentTab];
-		loadContent(_.last(tab));
+		loadContent(_.last(tab).view);
 	}
 };
 
