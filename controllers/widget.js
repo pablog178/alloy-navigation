@@ -11,6 +11,7 @@ var components = {
 	"header" : null,
 	"tabBar" : null
 };
+$.components = components;
 
 function init () {
 	var margins = {
@@ -132,14 +133,16 @@ $.open = function(params){
 	}
 	var view = params.view || (controller && controller.getView());
 	if(view){
-		var tabIndex = params.tabIndex || currentTab;
+		var tabIndex = params.tabIndex != null ? params.tabIndex : currentTab;
 		var tab = navigation[tabIndex];
 		tab.push({
 			controller: controller,
 			view: view
 		});
 		// tab = _.uniq(tab, true);
-		loadContent(view);
+		if(tabIndex == currentTab){
+			loadContent(view);
+		}
 	}
 
 	return controller || view || null;
@@ -151,7 +154,7 @@ $.close = function(params){
 	params = params || {};
 
 	//Obtain either the specified tab or the current one
-	var tabIndex = params.tabIndex || currentTab;
+	var tabIndex = params.tabIndex != null ? params.tabIndex : currentTab;
 	var tab = navigation[tabIndex];
 	var viewToClose;
 
@@ -176,7 +179,7 @@ $.close = function(params){
 
 $.closeAll = function(params){
 	params = params || {};
-	var tabIndex = params.tabIndex || currentTab;
+	var tabIndex = params.tabIndex != null ? params.tabIndex : currentTab;
 	var tab = navigation[tabIndex];
 	while(tab.length > 1){
 		$.close({
