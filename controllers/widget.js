@@ -64,6 +64,7 @@ function loadContent (view) {
 		var position = $.window.positions[i];
 		var component = components[i];
 		if(!view[hiddenProperty] && position !== "none"){
+			component && component.getView().show();
 			component[position] = margins[position];
 			margins[position] += component.getView().height;
 		} else {
