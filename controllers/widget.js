@@ -42,10 +42,15 @@ function init () {
 
 	if(OS_ANDROID){
 		$.window.addEventListener("android:back", function(){
-			if(navigation[currentTab].length > 1){
-				$.close();
-			} else {
+			var tab = navigation[currentTab];
+			var view = _.last(tab).view;
+			if(view.preventBack){
+				return false;
+			}
+			if(tab.length <= 1 || view.exitOnClose){
 				$.window.close();
+			} else {
+				$.close();
 			}
 		});
 	}
@@ -64,11 +69,15 @@ function loadContent (view) {
 		var position = $.window.positions[i];
 		var component = components[i];
 		if(!view[hiddenProperty] && position !== "none"){
-			component && component.getView().show();
+			if(component){
+				component.getView().visible = true;
+			}
 			component[position] = margins[position];
 			margins[position] += component.getView().height;
 		} else {
-			component && component.getView().hide();
+			if(component){
+				component.getView().visible = false;
+			}
 		}
 	}
 
