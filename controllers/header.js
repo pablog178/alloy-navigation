@@ -1,9 +1,11 @@
 var args = arguments[0] || {};
+var defaultStyle;
 
 if(_.size(args) > 0){
 	$.wrapper.applyProperties(args);
 	args.back && $.back.applyProperties(args.back);
 	args.title && $.title.applyProperties(args.title);
+	defaultStyle = args.title || {};
 }
 
 var currents = {
@@ -27,4 +29,9 @@ $.addLeftView = function(view){
 
 $.addRightView = function(view){
 	addView(view, "right");
+};
+
+$.updateStyle = function(style){
+	style = style || defaultStyle;
+	$.title.applyProperties(style);
 };

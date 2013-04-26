@@ -76,6 +76,7 @@ function loadContent (view) {
 
 	if(components.header){
 		components.header.title.text = view.title || "";
+		components.header.updateStyle(view.titleStyle);
 	}
 
 	if(navigation[currentTab].length < 2){
