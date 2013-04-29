@@ -56,7 +56,8 @@ function init () {
 	}
 }
 
-function loadContent (view) {
+function loadContent (view, animationOpts) {
+	animationOpts = animationOpts || {};
 	view = view || {};
 	var margins = {
 		top 	: 0,
@@ -95,11 +96,69 @@ function loadContent (view) {
 	components.header.addLeftView(view.navLeftView);
 	components.header.addRightView(view.navRightView);
 
-	openedContent && $.container.remove(openedContent);
-	//Free resources
-	openedContent = null;
-	openedContent = view;
-	$.container.add(view);
+	if(OS_IOS && animationOpts.animate && !view.preventAnimation && openedContent && !openedContent.preventAnimation){
+		view.zIndex = -1;
+		$.container.add(view);
+		var duration = 350;
+		var screenWidth = 320;
+		var imgView = view.toImage();
+		var imgOpen = openedContent.toImage();
+
+		var viewImg = Ti.UI.createImageView({
+			top: 0,
+			left: 0,
+			image: imgView,
+			width: imgView.width,
+			height: imgView.height,
+			touchEnabled: false
+		});
+		var openImg = Ti.UI.createImageView({
+			top: 0,
+			left: 0,
+			image: imgOpen,
+			width: imgOpen.width,
+			height: imgOpen.height,
+			touchEnabled: false
+		});
+		$.container.add(viewImg);
+		$.container.add(openImg);
+
+
+		var viewAnimation = {
+			left: 0,
+			duration: duration
+		};
+		var openAnimation = {
+			left: -screenWidth,
+			duration: duration
+		};
+		if(animationOpts.reverse){
+			openAnimation.left = openAnimation.left * -1;
+			viewImg.left = -screenWidth;
+		} else {
+			viewImg.left = screenWidth;
+		}
+		
+		$.container.remove(openedContent);
+		$.container.remove(view);
+		Ti.API.debug("animating");
+		viewImg.animate(viewAnimation);
+		openImg.animate(openAnimation, function(){
+			Ti.API.debug("freeing resources");
+			//Free resources
+			openedContent = null;
+			openedContent = view;
+			view.zIndex = 0;
+			$.container.add(view);
+		});
+	} else {
+		//Free resources
+		$.container.add(view);
+		openedContent && $.container.remove(openedContent);
+		openedContent = null;
+		openedContent = view;
+	}
+
 }
 
 //loads a new array info of base tabs to be openned
@@ -153,7 +212,9 @@ $.open = function(params){
 		});
 		// tab = _.uniq(tab, true);
 		if(tabIndex == currentTab){
-			loadContent(view);
+			loadContent(view, {
+				animate: true
+			});
 			controller.onOpen && controller.onOpen();
 		}
 	}
@@ -183,7 +244,10 @@ $.close = function(params){
 	}
 
 	if(viewToClose){
-		!params.preventLoad && loadContent(_.last(tab).view);
+		!params.preventLoad && loadContent(_.last(tab).view, {
+			animate: true,
+			reverse: true
+		});
 		viewToClose.controller && viewToClose.controller.finalize && viewToClose.controller.finalize();
 		return true;
 	}
