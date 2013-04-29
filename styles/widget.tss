@@ -6,6 +6,7 @@
 "#window[platform=android]" : {
 	exitOnClose: true,
 	modal: false,
+	navBarHidden : true,
 	positions : {
 		"header" : "top",
 		"tabBar" : "top"
