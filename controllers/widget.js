@@ -133,6 +133,7 @@ $.loadTabs = function(params) {
 			loadContent(view);
 		}
 	}
+	components.tabBar && components.tabBar.changeTab(currentTab);
 };
 //Opens a new window on the tab (if specified)
 $.open = function(params){

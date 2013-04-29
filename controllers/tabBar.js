@@ -1,4 +1,6 @@
 var args = arguments[0] || {};
+var myTabs = [];
+var lastTab;
 
 if(_.size(args) > 0){
 	$.wrapper.applyProperties(args);
@@ -19,9 +21,12 @@ $.loadTabs = function(params){
 		tabData.style = args.tab || null;
 		var tabCtr = Alloy.createWidget("navigation", "tab", tabData);
 		$.wrapper.add(tabCtr.getView());
+		myTabs.push(tabCtr);
 	}
 };
 
 $.changeTab = function(index){
-
+	lastTab && lastTab.setActive(false);
+	myTabs[index] && myTabs[index].setActive(true);
+	lastTab = myTabs[index];
 };
