@@ -154,6 +154,7 @@ $.open = function(params){
 		// tab = _.uniq(tab, true);
 		if(tabIndex == currentTab){
 			loadContent(view);
+			controller.onOpen && controller.onOpen();
 		}
 	}
 
