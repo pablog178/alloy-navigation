@@ -1,7 +1,8 @@
 "#window" : {
 	width: Ti.UI.FILL,
 	height: Ti.UI.FILL,
-	backgroundColor : "#FFF"
+	backgroundColor : "#FFF",
+	orientationModes : [ Ti.UI.PORTRAIT ]
 },
 "#window[platform=android]" : {
 	exitOnClose: true,

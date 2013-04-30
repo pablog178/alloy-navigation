@@ -150,6 +150,10 @@ function loadContent (view, animationOpts) {
 			openedContent = view;
 			view.zIndex = 0;
 			$.container.add(view);
+			$.container.remove(viewImg);
+			$.container.remove(openImg);
+			viewImg = null;
+			openImg = null;
 		});
 	} else {
 		//Free resources
@@ -248,7 +252,10 @@ $.close = function(params){
 			animate: true,
 			reverse: true
 		});
-		viewToClose.controller && viewToClose.controller.finalize && viewToClose.controller.finalize();
+		if(viewToClose.controller){
+			viewToClose.controller.finalize && viewToClose.controller.finalize();
+			viewToClose.controller.destroy();
+		}
 		return true;
 	}
 	return false;
